@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "last_updated": "2026-01-18",
+    "network": "Polygon Mainnet",
+    "chain_id": 137,
+    "sources": [
+      "https://docs.polymarket.com/",
+      "https://docs.uma.xyz/resources/network-addresses",
+      "https://polygonscan.com/"
+    ]
+  },
+
+  "collateral": {
+    "USDC_e": {
+      "name": "Bridged USDC (USDC.e)",
+      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+      "decimals": 6,
+      "type": "ERC20"
+    }
+  },
+
+  "gnosis_ctf": {
+    "ConditionalTokens": {
+      "name": "Gnosis Conditional Tokens Framework",
+      "address": "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045",
+      "type": "ERC1155",
+      "github": "https://github.com/gnosis/conditional-tokens-contracts"
+    }
+  },
+
+  "uma_protocol": {
+    "OptimisticOracleV2": {
+      "name": "UMA Optimistic Oracle V2",
+      "address": "0xee3afe347d5c74317041e2618c49534daf887c24",
+      "notes": "Main oracle for Polymarket resolution"
+    },
+    "OptimisticOracleV3": {
+      "name": "UMA Optimistic Oracle V3",
+      "address": "0x5953f2538F613E05bAED8A5AeFa8e6622467AD3D",
+      "notes": "Newer version, some markets use this"
+    },
+    "Finder": {
+      "address": "0x09aea4b2242abC8bb4BB78D537A67a245A7bEC64"
+    },
+    "Store": {
+      "address": "0xE58480CA74f1A819faFd777BEDED4E2D5629943d"
+    },
+    "IdentifierWhitelist": {
+      "address": "0x2271a5E74eA8A29764ab10523575b41AA52455f0"
+    },
+    "AddressWhitelist": {
+      "address": "0x1020Ae36548ab28Bc0c41Fd2a08D24132C82cc55"
+    }
+  },
+
+  "polymarket_adapters": {
+    "UmaCtfAdapter_v3_1": {
+      "name": "UMA CTF Adapter v3.1",
+      "address": "0x157Ce2d672854c848c9b79C49a8Cc6cc89176a49",
+      "status": "latest",
+      "deployed": "August 2023",
+      "github": "https://github.com/Polymarket/uma-ctf-adapter",
+      "release_notes": "Audit fixes, external interface pragma corrections"
+    },
+    "UmaCtfAdapter_v3_0": {
+      "name": "UMA CTF Adapter v3.0",
+      "address": "0x71392E133063CC0D16F40E1F9B60227404Bc03f7",
+      "status": "active",
+      "github": "https://github.com/Polymarket/uma-ctf-adapter"
+    },
+    "UmaCtfAdapter_v3": {
+      "name": "UMA CTF Adapter v3 (High-volume deployment)",
+      "address": "0x2F5e3684cb1F318ec51b00Edba38d79Ac2c0aA9d",
+      "status": "active",
+      "transactions": "179,737+",
+      "notes": "Primary production adapter"
+    },
+    "UmaCtfAdapter_v2": {
+      "name": "UMA CTF Adapter v2",
+      "address": "0x6A9D222616C90FcA5754cd1333cFD9b7fb6a4F74",
+      "status": "legacy_active",
+      "transactions": "56,201+",
+      "features": ["bulletin_board_clarifications"],
+      "github": "https://github.com/Polymarket/uma-ctf-adapter"
+    },
+    "UmaCtfAdapter_v1_0_1": {
+      "name": "UMA CTF Adapter v1.0.1",
+      "address": "0xB97455fcF78eb37375e8be6f26df895341CA073d",
+      "status": "deprecated",
+      "github": "https://github.com/Polymarket/uma-ctf-adapter"
+    },
+    "UmaCtfAdapter_v1": {
+      "name": "UMA CTF Adapter v1.0.0",
+      "address": "0xCB1822859cEF82Cd2Eb4E6276C7916e692995130",
+      "status": "deprecated",
+      "github": "https://github.com/Polymarket/uma-ctf-adapter"
+    },
+    "UmaCtfAdapter_unknown": {
+      "name": "UMA CTF Adapter (Unknown/Custom)",
+      "address": "0x65070be91477460d8a7aeeb94ef92fe056c2f2a7",
+      "status": "active",
+      "transactions": "257,960+",
+      "deployed": "~July-August 2024",
+      "notes": "Not in official GitHub releases. Possibly custom deployment or pre-release version.",
+      "compiler": "Solidity v0.8.15 (1M optimization runs)"
+    }
+  },
+
+  "polymarket_exchanges": {
+    "CTFExchange": {
+      "name": "Polymarket CTF Exchange",
+      "address": "0x4bFb41d5B3570DeFd03C39A9A4D8dE6Bd8B8982E",
+      "purpose": "Binary market order settlement",
+      "github": "https://github.com/Polymarket/ctf-exchange"
+    },
+    "NegRiskCTFExchange": {
+      "name": "Polymarket NegRisk CTF Exchange",
+      "address": "0xC5d563A36AE78145C45a50134d48A1215220F80a",
+      "purpose": "Multi-outcome market settlement"
+    }
+  },
+
+  "polymarket_neg_risk": {
+    "NegRiskAdapter": {
+      "name": "Negative Risk Adapter",
+      "address": "0xd91E80cF2E7be2e162c6513ceD06f1dD0dA35296",
+      "purpose": "Convert NO tokens to YES tokens across markets",
+      "github": "https://github.com/Polymarket/neg-risk-ctf-adapter"
+    },
+    "NegRiskFeeModule": {
+      "name": "Polymarket Neg Risk Fee Module",
+      "address": "0x78769d50be1763ed1ca0d5e878d93f05aabff29e",
+      "purpose": "Fee management for NegRisk markets (version 1)",
+      "notes": "Works with NegRisk CTF Exchange for dynamic fee handling"
+    },
+    "NegRiskFeeModule_v2": {
+      "name": "Polymarket Neg Risk Fee Module 2",
+      "address": "0xB768891e3130F6dF18214Ac804d4DB76c2C37730",
+      "purpose": "Fee management for NegRisk markets (version 2)",
+      "notes": "Lightweight fork of fee module for NegRisk CTF Exchange",
+      "github": "https://github.com/Polymarket/exchange-fee-module"
+    }
+  },
+
+  "market_lifecycle": {
+    "creation": {
+      "step_0_approve": {
+        "actor": "market_creator (whitelisted)",
+        "contract": "USDC_e",
+        "function": "approve(address spender, uint256 amount)",
+        "params": {
+          "spender": "UmaCtfAdapter address",
+          "amount": "reward_amount"
+        }
+      },
+      "step_1_initialize": {
+        "actor": "market_creator (whitelisted)",
+        "contract": "UmaCtfAdapter",
+        "function": "initialize(bytes ancillaryData, address rewardToken, uint256 reward, uint256 proposalBond, uint256 liveness)",
+        "params": {
+          "ancillaryData": "UTF-8 encoded question + resolution rules",
+          "rewardToken": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+          "reward": "proposer reward in USDC (e.g., 5e6 = 5 USDC)",
+          "proposalBond": "0 for default (~750 USDC) or custom amount",
+          "liveness": "0 for default (7200 seconds) or custom seconds"
+        },
+        "returns": ["questionId (bytes32)", "conditionId (bytes32)"],
+        "internal_calls": [
+          "CTF.prepareCondition(oracle, questionId, 2)",
+          "OptimisticOracleV2.requestPrice(...)"
+        ]
+      }
+    },
+
+    "trading": {
+      "step_2_approve_ctf": {
+        "actor": "trader",
+        "contract": "USDC_e",
+        "function": "approve(address spender, uint256 amount)",
+        "params": {
+          "spender": "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045",
+          "amount": "max or specific amount"
+        }
+      },
+      "step_3_split_position": {
+        "actor": "trader",
+        "contract": "ConditionalTokens",
+        "function": "splitPosition(IERC20 collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] partition, uint256 amount)",
+        "params": {
+          "collateralToken": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+          "parentCollectionId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "conditionId": "from step_1",
+          "partition": [1, 2],
+          "amount": "USDC amount to split"
+        },
+        "effect": "Burns USDC, mints equal YES + NO tokens"
+      },
+      "step_4_approve_exchange": {
+        "actor": "trader",
+        "contract": "ConditionalTokens",
+        "function": "setApprovalForAll(address operator, bool approved)",
+        "params": {
+          "operator": "0x4bFb41d5B3570DeFd03C39A9A4D8dE6Bd8B8982E",
+          "approved": true
+        }
+      },
+      "step_4b_merge_optional": {
+        "actor": "trader",
+        "contract": "ConditionalTokens",
+        "function": "mergePositions(IERC20 collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] partition, uint256 amount)",
+        "effect": "Burns equal YES + NO tokens, returns USDC"
+      }
+    },
+
+    "resolution": {
+      "step_5_propose": {
+        "actor": "any user (or whitelisted on MOOV2)",
+        "contract": "OptimisticOracleV2",
+        "function": "proposePrice(address requester, bytes32 identifier, uint256 timestamp, bytes ancillaryData, int256 proposedPrice)",
+        "params": {
+          "requester": "UmaCtfAdapter address",
+          "identifier": "YES_OR_NO_QUERY",
+          "proposedPrice": "1e18 for YES, 0 for NO, 0.5e18 for invalid"
+        },
+        "bond_required": "~750 USDC (default)",
+        "reward_on_success": "~5 USDC"
+      },
+      "step_6_dispute_optional": {
+        "actor": "any user",
+        "contract": "OptimisticOracleV2",
+        "function": "disputePrice(address requester, bytes32 identifier, uint256 timestamp, bytes ancillaryData)",
+        "bond_required": "~750 USDC",
+        "first_dispute_effect": "Resets market, new proposal needed",
+        "second_dispute_effect": "Escalates to UMA DVM (48-96hr vote)"
+      },
+      "step_7_resolve": {
+        "actor": "any user (after liveness or DVM)",
+        "contract": "UmaCtfAdapter",
+        "function": "resolve(bytes32 questionId)",
+        "internal_calls": [
+          "OptimisticOracleV2.settleAndGetPrice(...)",
+          "CTF.reportPayouts(questionId, payoutNumerators)"
+        ]
+      }
+    },
+
+    "settlement": {
+      "step_8_redeem": {
+        "actor": "token holder",
+        "contract": "ConditionalTokens",
+        "function": "redeemPositions(IERC20 collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] indexSets)",
+        "params": {
+          "collateralToken": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+          "parentCollectionId": "0x0",
+          "conditionId": "market conditionId",
+          "indexSets": "[1] for YES, [2] for NO, [1,2] for both"
+        },
+        "effect": "Burns tokens, transfers proportional USDC based on payout vector"
+      }
+    }
+  },
+
+  "parameters": {
+    "default_liveness": {
+      "value": 7200,
+      "unit": "seconds",
+      "human": "2 hours"
+    },
+    "default_bond": {
+      "value": "~750",
+      "unit": "USDC",
+      "notes": "Varies, check current settings"
+    },
+    "proposer_reward": {
+      "value": "~5",
+      "unit": "USDC",
+      "notes": "Paid to correct proposer"
+    },
+    "dvm_voting_period": {
+      "value": "48-96",
+      "unit": "hours",
+      "notes": "Commit + reveal phases"
+    }
+  },
+
+  "payout_vectors": {
+    "yes_wins": {
+      "vector": [1, 0],
+      "yes_token_value": "1 USDC",
+      "no_token_value": "0 USDC"
+    },
+    "no_wins": {
+      "vector": [0, 1],
+      "yes_token_value": "0 USDC",
+      "no_token_value": "1 USDC"
+    },
+    "invalid": {
+      "vector": [1, 1],
+      "yes_token_value": "0.5 USDC",
+      "no_token_value": "0.5 USDC",
+      "warning": "Not compatible with NegRisk markets"
+    }
+  },
+
+  "id_derivation": {
+    "questionId": "keccak256(ancillaryData)",
+    "conditionId": "keccak256(abi.encodePacked(oracle, questionId, uint256(2)))",
+    "collectionId": "CTF.getCollectionId(parentCollectionId, conditionId, indexSet)",
+    "positionId": "CTF.getPositionId(collateralToken, collectionId)"
+  }
+}

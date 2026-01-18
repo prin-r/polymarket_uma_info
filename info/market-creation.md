@@ -1,8 +1,6 @@
-# Polymarket Market Creation: Deep Dive
+# Polymarket Market Creation
 
 > Contract-level walkthrough with real transaction examples
-
-**Last Updated:** 2026-01-18
 
 ---
 
@@ -498,22 +496,22 @@ After initialization, the market enters the **proposal phase**:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    POST-INITIALIZATION                       │
+│                    POST-INITIALIZATION                      │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│   MARKET STATE: Awaiting Proposal                            │
-│                                                              │
+│                                                             │
+│   MARKET STATE: Awaiting Proposal                           │
+│                                                             │
 │   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
 │   │  Proposer   │───▶│  Liveness   │───▶│   Settle    │     │
 │   │  submits    │    │  (2 hours)  │    │   & Resolve │     │
 │   │  answer     │    │             │    │             │     │
 │   └─────────────┘    └──────┬──────┘    └─────────────┘     │
-│                             │                                │
+│                             │                               │
 │                        ┌────▼────┐                          │
 │                        │ Dispute │                          │
 │                        │ (reset) │                          │
 │                        └─────────┘                          │
-│                                                              │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -664,23 +662,23 @@ Price request with:
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  1. ANYONE calls UmaCtfAdapter.resolve(questionID)                  │
-│     └─ Permissionless function                                     │
+│     └─ Permissionless function                                      │
 │                                                                     │
 │  2. resolve() calls _resolve() internally                           │
 │                                                                     │
 │  3. _resolve() fetches price from UMA                               │
-│     └─ optimisticOracle.settleAndGetPrice()                        │
-│     └─ Returns: int256 price (1e18=YES, 0=NO, 0.5e18=UNKNOWN)      │
+│     └─ optimisticOracle.settleAndGetPrice()                         │
+│     └─ Returns: int256 price (1e18=YES, 0=NO, 0.5e18=UNKNOWN)       │
 │                                                                     │
 │  4. _resolve() converts price to payout vector                      │
-│     └─ _constructPayouts(price)                                    │
-│     └─ Returns: [1,0] for YES, [0,1] for NO, [1,1] for UNKNOWN     │
+│     └─ _constructPayouts(price)                                     │
+│     └─ Returns: [1,0] for YES, [0,1] for NO, [1,1] for UNKNOWN      │
 │                                                                     │
 │  5. _resolve() reports to CTF                                       │
-│     └─ ctf.reportPayouts(questionID, payouts)                      │
+│     └─ ctf.reportPayouts(questionID, payouts)                       │
 │                                                                     │
 │  6. CTF stores the result                                           │
-│     └─ payoutNumerators[conditionId] = payouts                     │
+│     └─ payoutNumerators[conditionId] = payouts                      │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -784,24 +782,24 @@ Polymarket uses a two-tier dispute system to balance speed with accuracy:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                    DISPUTE FLOW                                      │
+│                    DISPUTE FLOW                                     │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  FIRST DISPUTE: Market Reset                                        │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │ Initial Proposal → Dispute! → Market RESETS                  │   │
-│  │ • Burns 375 USDC (50% of proposer's bond)                   │   │
-│  │ • Creates new price request                                  │   │
-│  │ • Waiting for new proposal                                   │   │
-│  └─────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │ Initial Proposal → Dispute! → Market RESETS                 │    │
+│  │ • Burns 375 USDC (50% of proposer's bond)                   │    │
+│  │ • Creates new price request                                 │    │
+│  │ • Waiting for new proposal                                  │    │
+│  └─────────────────────────────────────────────────────────────┘    │
 │                                                                     │
 │  SECOND DISPUTE: DVM Escalation                                     │
-│  ┌─────────────────────────────────────────────────────────────┐   │
-│  │ Reset Proposal → Dispute! → DVM Voting (48-96 hours)         │   │
-│  │ • Burns another 375 USDC                                     │   │
-│  │ • NO RESET this time                                         │   │
-│  │ • UMA token holders vote on final answer                     │   │
-│  └─────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │ Reset Proposal → Dispute! → DVM Voting (48-96 hours)        │    │
+│  │ • Burns another 375 USDC                                    │    │
+│  │ • NO RESET this time                                        │    │
+│  │ • UMA token holders vote on final answer                    │    │
+│  └─────────────────────────────────────────────────────────────┘    │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -989,7 +987,7 @@ curl "https://api.polygonscan.com/api?module=logs&action=getLogs&address=0x2F5e3
 ### Internal Documentation
 - [Resolution Q&A](resolution-qa.md) - Comprehensive Q&A on resolution flow, disputes, and edge cases
 - [Market Lifecycle](market-lifecycle.md) - High-level overview of market phases
-- [UMA Oracle Deep Dive](uma-oracle.md) - Detailed analysis of UMA's Optimistic Oracle
+- [UMA Oracle](uma-oracle.md) - Detailed analysis of UMA's Optimistic Oracle
 
 ### Source Code (GitHub)
 

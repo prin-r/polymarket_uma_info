@@ -2,7 +2,6 @@
 
 > Hybrid-decentralized order book for prediction market trading
 
-**Last Updated:** 2026-01-19
 
 ## Overview
 
@@ -30,10 +29,10 @@ Polymarket uses a Central Limit Order Book (CLOB) with a hybrid-decentralized ar
 │                                          │                              │
 │                        ┌─────────────────┼─────────────────┐            │
 │                        ▼                 ▼                 ▼            │
-│                   ┌─────────┐      ┌─────────┐      ┌─────────┐        │
-│                   │ NORMAL  │      │  MINT   │      │  MERGE  │        │
-│                   │ (Swap)  │      │ (Create)│      │ (Burn)  │        │
-│                   └─────────┘      └─────────┘      └─────────┘        │
+│                   ┌─────────┐      ┌─────────┐      ┌─────────┐         │ 
+│                   │ NORMAL  │      │  MINT   │      │  MERGE  │         │
+│                   │ (Swap)  │      │ (Create)│      │ (Burn)  │         │
+│                   └─────────┘      └─────────┘      └─────────┘         │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```

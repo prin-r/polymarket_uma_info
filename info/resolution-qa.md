@@ -2,7 +2,6 @@
 
 > Comprehensive Q&A covering the resolution flow, proposers, disputes, and timing
 
-**Last Updated:** 2026-01-19
 
 ---
 

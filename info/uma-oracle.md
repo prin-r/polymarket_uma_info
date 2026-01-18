@@ -1,8 +1,6 @@
-# UMA Optimistic Oracle Deep Dive
+# UMA Optimistic Oracle
 
 > Contract-level analysis of how UMA's Optimistic Oracle works
-
-**Last Updated:** 2026-01-18
 
 ---
 
@@ -36,24 +34,24 @@ The key insight: **99%+ of requests settle optimistically** without needing the 
 │                    UMA OPTIMISTIC ORACLE FLOW                         │
 ├───────────────────────────────────────────────────────────────────────┤
 │                                                                       │
-│   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────────────┐   │
-│   │ Request │───▶│ Propose │───▶│Liveness │───▶│ Settle (Accept) │   │
-│   │  Price  │    │  Price  │    │  (2hr)  │    │                 │   │
-│   └─────────┘    └────┬────┘    └────┬────┘    └─────────────────┘   │
+│   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────────────┐    │
+│   │ Request │───▶│ Propose │───▶│Liveness │───▶│ Settle (Accept) │    │
+│   │  Price  │    │  Price  │    │  (2hr)  │    │                 │    │
+│   └─────────┘    └────┬────┘    └────┬────┘    └─────────────────┘    │
 │                       │              │                                │
-│                       │         ┌────▼────┐                          │
-│                       │         │ Dispute │                          │
-│                       │         └────┬────┘                          │
+│                       │         ┌────▼────┐                           │
+│                       │         │ Dispute │                           │
+│                       │         └────┬────┘                           │
 │                       │              │                                │
-│              ┌────────▼──────────────▼────────┐                      │
-│              │   First Dispute = Reset        │                      │
-│              │   Second Dispute = DVM Vote    │                      │
-│              └────────────────────────────────┘                      │
+│              ┌────────▼──────────────▼────────┐                       │
+│              │   First Dispute = Reset        │                       │
+│              │   Second Dispute = DVM Vote    │                       │
+│              └────────────────────────────────┘                       │
 │                              │                                        │
-│                     ┌────────▼────────┐                              │
-│                     │    DVM Vote     │                              │
-│                     │   (48-96 hrs)   │                              │
-│                     └─────────────────┘                              │
+│                     ┌────────▼────────┐                               │
+│                     │    DVM Vote     │                               │
+│                     │   (48-96 hrs)   │                               │
+│                     └─────────────────┘                               │
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
 ```
@@ -236,38 +234,38 @@ bytes32 requestId = keccak256(
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        COMPLETE OOv2 LIFECYCLE                               │
+│                        COMPLETE OOv2 LIFECYCLE                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  1. REQUEST PHASE                                                           │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ Requester calls requestPrice()                                       │   │
-│  │ • Transfers reward to OOv2 contract                                  │   │
-│  │ • State: Invalid → Requested                                         │   │
-│  │ • Emits RequestPrice event                                           │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ Requester calls requestPrice()                                      │    │
+│  │ • Transfers reward to OOv2 contract                                 │    │
+│  │ • State: Invalid → Requested                                        │    │
+│  │ • Emits RequestPrice event                                          │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
 │                                    │                                        │
 │                                    ▼                                        │
 │  2. PROPOSAL PHASE                                                          │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
 │  │ Proposer calls proposePrice()                                        │   │
 │  │ • Transfers bond + finalFee to OOv2 contract                         │   │
 │  │ • Sets expirationTime = now + liveness                               │   │
 │  │ • State: Requested → Proposed                                        │   │
 │  │ • Emits ProposePrice event                                           │   │
 │  │ • Optional: Callback to requester.priceProposed()                    │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
+│  └─────────────────────────────────────────────────────────────────────┘    │
 │                                    │                                        │
-│                    ┌───────────────┴───────────────┐                       │
+│                    ┌───────────────┴───────────────┐                        │
 │                    ▼                               ▼                        │
-│  3a. NO DISPUTE (Happy Path)          3b. DISPUTE PATH                     │
-│  ┌────────────────────────────┐      ┌─────────────────────────────────┐   │
-│  │ Liveness period passes     │      │ Disputer calls disputePrice()   │   │
-│  │ • No one disputes          │      │ • Transfers bond + finalFee     │   │
-│  │ • State: Proposed → Expired│      │ • Escalates to DVM              │   │
-│  └────────────────────────────┘      │ • State: Proposed → Disputed    │   │
-│                    │                  │ • Emits DisputePrice event      │   │
-│                    │                  └─────────────────────────────────┘   │
+│  3a. NO DISPUTE (Happy Path)          3b. DISPUTE PATH                      │
+│  ┌────────────────────────────┐      ┌─────────────────────────────────┐    │
+│  │ Liveness period passes     │      │ Disputer calls disputePrice()   │    │
+│  │ • No one disputes          │      │ • Transfers bond + finalFee     │    │
+│  │ • State: Proposed → Expired│      │ • Escalates to DVM              │    │
+│  └────────────────────────────┘      │ • State: Proposed → Disputed    │    │
+│                    │                 │ • Emits DisputePrice event      │    │
+│                    │                 └─────────────────────────────────┘    │
 │                    │                               │                        │
 │                    │                               ▼                        │
 │                    │                  ┌─────────────────────────────────┐   │
@@ -277,17 +275,17 @@ bytes32 requestId = keccak256(
 │                    │                  │ • State: Disputed → Resolved    │   │
 │                    │                  └─────────────────────────────────┘   │
 │                    │                               │                        │
-│                    └───────────────┬───────────────┘                       │
+│                    └───────────────┬───────────────┘                        │
 │                                    ▼                                        │
 │  4. SETTLEMENT PHASE                                                        │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │ Anyone calls settle()                                                │   │
-│  │ • Distributes bonds based on outcome                                 │   │
-│  │ • Winner gets: bond + reward + loser's bond share                    │   │
-│  │ • State: Expired/Resolved → Settled                                  │   │
-│  │ • Emits Settle event                                                 │   │
-│  │ • Optional: Callback to requester.priceSettled()                     │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ Anyone calls settle()                                               │    │
+│  │ • Distributes bonds based on outcome                                │    │
+│  │ • Winner gets: bond + reward + loser's bond share                   │    │
+│  │ • State: Expired/Resolved → Settled                                 │    │
+│  │ • Emits Settle event                                                │    │
+│  │ • Optional: Callback to requester.priceSettled()                    │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -1252,7 +1250,7 @@ event Settle(
 ### Internal Documentation
 - [Resolution Q&A](resolution-qa.md) - Comprehensive Q&A on resolution flow, disputes, and edge cases
 - [Market Lifecycle](market-lifecycle.md) - High-level overview of market phases
-- [Market Creation Deep Dive](market-creation-deep-dive.md) - Contract-level walkthrough with transaction examples
+- [Market Creation](market-creation.md) - Contract-level walkthrough with transaction examples
 
 ### Official Documentation
 - [UMA: How Oracle Works](https://docs.uma.xyz/protocol-overview/how-does-umas-oracle-work)

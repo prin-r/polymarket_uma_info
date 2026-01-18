@@ -1,8 +1,5 @@
 # Polymarket Technical Architecture
 
-> Deep dive into Polymarket's prediction market infrastructure on Polygon
-
-**Last Updated:** 2026-01-18
 **Network:** Polygon Mainnet (Chain ID: 137)
 
 ## Overview
@@ -17,20 +14,20 @@ Polymarket is a decentralized prediction market platform built on Polygon. It us
 │                         POLYMARKET ARCHITECTURE                         │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
-│  ┌─────────────┐    ┌──────────────────┐    ┌─────────────────────┐    │
-│  │   Traders   │───▶│   CLOB (Off-chain)│───▶│  CTF Exchange       │    │
-│  └─────────────┘    │   Order Matching  │    │  (On-chain Settle)  │    │
-│                     └──────────────────┘    └──────────┬──────────┘    │
-│                                                        │               │
-│  ┌─────────────┐    ┌──────────────────┐    ┌─────────▼──────────┐    │
-│  │   Market    │───▶│  UmaCtfAdapter   │───▶│ Conditional Tokens │    │
-│  │   Creator   │    │   (Oracle Glue)   │    │   (ERC1155 CTF)    │    │
-│  └─────────────┘    └────────┬─────────┘    └────────────────────┘    │
-│                              │                                         │
-│                     ┌────────▼─────────┐    ┌─────────────────────┐    │
-│                     │  UMA Optimistic  │───▶│   UMA DVM           │    │
-│                     │  Oracle V2       │    │   (Dispute Voting)  │    │
-│                     └──────────────────┘    └─────────────────────┘    │
+│  ┌─────────────┐    ┌──────────────────┐    ┌─────────────────────┐     │
+│  │   Traders   │───▶│  CLOB (Off-chain)│───▶│  CTF Exchange       │     │
+│  └─────────────┘    │  Order Matching  │    │  (On-chain Settle)  │     │
+│                     └──────────────────┘    └──────────┬──────────┘     │
+│                                                        │                │
+│  ┌─────────────┐    ┌──────────────────┐    ┌─────────▼──────────┐      │
+│  │   Market    │───▶│  UmaCtfAdapter   │───▶│ Conditional Tokens │      │
+│  │   Creator   │    │   (Oracle Glue)  │    │   (ERC1155 CTF)    │      │
+│  └─────────────┘    └────────┬─────────┘    └────────────────────┘      │
+│                              │                                          │
+│                     ┌────────▼─────────┐    ┌─────────────────────┐     │
+│                     │  UMA Optimistic  │───▶│   UMA DVM           │     │
+│                     │  Oracle V2       │    │   (Dispute Voting)  │     │
+│                     └──────────────────┘    └─────────────────────┘     │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```

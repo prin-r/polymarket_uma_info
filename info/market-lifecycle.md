@@ -2,7 +2,6 @@
 
 > Complete flow from market creation to settlement
 
-**Last Updated:** 2026-01-19
 
 ## Lifecycle Phases
 
@@ -436,8 +435,8 @@ See [resolution-qa.md](resolution-qa.md#finding-bond-costs-and-fees) for on-chai
 
 ### Internal Documentation
 - [Resolution Q&A](resolution-qa.md) - Comprehensive Q&A on resolution flow, disputes, and edge cases
-- [Market Creation Deep Dive](market-creation-deep-dive.md) - Contract-level walkthrough with transaction examples
-- [UMA Oracle Deep Dive](uma-oracle.md) - Detailed analysis of UMA's Optimistic Oracle
+- [Market Creation](market-creation.md) - Contract-level walkthrough with transaction examples
+- [UMA Oracle](uma-oracle.md) - Detailed analysis of UMA's Optimistic Oracle
 
 ### External Documentation
 - [Polymarket Resolution Docs](https://docs.polymarket.com/developers/resolution/UMA)

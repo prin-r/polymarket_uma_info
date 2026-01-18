@@ -1,7 +1,5 @@
 # Binary vs NegRisk Markets: Complete Comparison
 
-**Last Updated:** 2026-01-19
-
 ## Overview
 
 Polymarket uses two distinct market architectures depending on whether multiple outcomes can be true simultaneously or only one outcome can win.

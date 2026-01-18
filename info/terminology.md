@@ -2,7 +2,6 @@
 
 > Glossary of terms used in Polymarket and prediction market infrastructure
 
-**Last Updated:** 2026-01-19
 
 ---
 

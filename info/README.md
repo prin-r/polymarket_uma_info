@@ -2,7 +2,6 @@
 
 Comprehensive technical documentation for Polymarket's prediction market architecture on Polygon.
 
-**Last Updated:** 2026-01-19
 
 ---
 
@@ -31,14 +30,14 @@ New to Polymarket? Start here:
 | Document | Description | Best For |
 |----------|-------------|----------|
 | [contracts.json](contracts.json) | All contract addresses and versions | Finding contract addresses |
-| [conditional-tokens.md](conditional-tokens.md) | Gnosis CTF deep dive | Understanding outcome tokens |
+| [conditional-tokens.md](conditional-tokens.md) | Gnosis CTF | Understanding outcome tokens |
 | [uma-oracle.md](uma-oracle.md) | UMA Optimistic Oracle mechanics | Understanding resolution |
 
 ### Market Operations
 
 | Document | Description | Best For |
 |----------|-------------|----------|
-| [market-creation-deep-dive.md](market-creation-deep-dive.md) | Contract-level market creation walkthrough | Creating markets, debugging |
+| [market-creation.md](market-creation.md) | Contract-level market creation walkthrough | Creating markets, debugging |
 | [market-lifecycle.md](market-lifecycle.md) | Complete market lifecycle steps | Trading, redemption |
 | [clob-exchange.md](clob-exchange.md) | Exchange mechanics and order matching | Understanding trading |
 | [resolution-qa.md](resolution-qa.md) | Q&A on resolution flow, proposers, disputes | Understanding resolution process |
@@ -49,7 +48,7 @@ New to Polymarket? Start here:
 
 ### Market Creation
 
-**Start:** [market-creation-deep-dive.md](market-creation-deep-dive.md)
+**Start:** [market-creation.md](market-creation.md)
 
 Learn how to create a Polymarket prediction market:
 - Contract function calls with code snippets
@@ -141,7 +140,7 @@ How markets resolve:
 
 ### "How do I create a market?"
 
-See: [market-creation-deep-dive.md](market-creation-deep-dive.md)
+See: [market-creation.md](market-creation.md)
 
 ```solidity
 1. Approve USDC to UmaCtfAdapter
@@ -179,7 +178,7 @@ NOT during market creation! Tokens are minted when:
 1. Trader manually calls `CTF.splitPosition()`, OR
 2. Exchange auto-mints in MINT mode (complementary orders)
 
-See: [market-creation-deep-dive.md#token-minting--initial-pricing](market-creation-deep-dive.md#token-minting--initial-pricing)
+See: [market-creation.md#token-minting--initial-pricing](market-creation.md#token-minting--initial-pricing)
 
 ### "What's the initial price?"
 
@@ -224,9 +223,9 @@ blockchain/polymarket/
 ├── terminology.md                   # Glossary (50+ terms)
 ├── binary-vs-negrisk.md            # Market type comparison
 ├── contracts.json                   # All contract addresses
-├── market-creation-deep-dive.md    # In-depth market creation guide
+├── market-creation.md    # In-depth market creation guide
 ├── market-lifecycle.md              # Complete lifecycle walkthrough
-├── conditional-tokens.md            # Gnosis CTF deep dive
+├── conditional-tokens.md            # Gnosis CTF
 ├── uma-oracle.md                    # Oracle mechanics
 ├── clob-exchange.md                # Trading mechanics
 └── resolution-qa.md                 # Q&A on resolution, disputes, proposers
@@ -259,7 +258,7 @@ Last verified: 2026-01-18
 │  2. INITIALIZE MARKET                                           │
 │     └─> UmaCtfAdapter.initialize(...)                           │
 │         ├─> CTF.prepareCondition() → conditionId created        │
-│         ├─> OptimisticOracle.requestPrice() → oracle request   │
+│         ├─> OptimisticOracle.requestPrice() → oracle request    │
 │         └─> QuestionData saved                                  │
 │                                                                 │
 │  3. MARKET MAKERS POST ORDERS (off-chain)                       │
@@ -270,7 +269,7 @@ Last verified: 2026-01-18
 │         └─> CTF.splitPosition() → YES/NO tokens minted          │
 │                                                                 │
 │  5. PROPOSE RESOLUTION                                          │
-│     └─> OptimisticOracle.proposePrice(answer, bond)            │
+│     └─> OptimisticOracle.proposePrice(answer, bond)             │
 │                                                                 │
 │  6. LIVENESS PERIOD (2 hours)                                   │
 │     └─> Can be disputed with ~750 USDC bond                     │
@@ -280,7 +279,7 @@ Last verified: 2026-01-18
 │         └─> CTF.reportPayouts([1,0] or [0,1])                   │
 │                                                                 │
 │  8. REDEEM WINNINGS                                             │
-│     └─> CTF.redeemPositions() → winning tokens → USDC          │
+│     └─> CTF.redeemPositions() → winning tokens → USDC           │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```

@@ -2,7 +2,6 @@
 
 > ERC1155 tokens representing prediction market outcomes
 
-**Last Updated:** 2026-01-19
 
 ## Overview
 
@@ -17,14 +16,14 @@ The Conditional Tokens Framework (CTF) is Gnosis's system for creating tokenized
 │         │                                                               │
 │         ▼ splitPosition                                                 │
 │   ┌─────────────┐                                                       │
-│   │  CONDITION  │ ◄── conditionId = hash(oracle, questionId, 2)        │
+│   │  CONDITION  │ ◄── conditionId = hash(oracle, questionId, 2)         │
 │   │  (Binary)   │                                                       │
 │   └──────┬──────┘                                                       │
 │          │                                                              │
 │    ┌─────┴─────┐                                                        │
 │    ▼           ▼                                                        │
 │ ┌──────┐   ┌──────┐                                                     │
-│ │ YES  │   │  NO  │  ◄── ERC1155 tokens (positionIds)                  │
+│ │ YES  │   │  NO  │  ◄── ERC1155 tokens (positionIds)                   │
 │ │ idx=1│   │ idx=2│                                                     │
 │ └──────┘   └──────┘                                                     │
 │    │           │                                                        │
